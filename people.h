@@ -8,7 +8,7 @@ class Person;
 class PersonObserver {
 public:
     // Этот метод вызывается, когда меняется состояние удовлетворённости человека
-    virtual void OnSatisfactionChanged (Person& c /*person*/, int old_value, int new_value) {
+    virtual void OnSatisfactionChanged(Person& person, int old_value, int new_value) {
         cout << "The Satisfaction changed from " << old_value << " to " << new_value << endl;
     }
 

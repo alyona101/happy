@@ -23,7 +23,7 @@ void Tests() {
         Person* person = nullptr;
         optional<int> old_satisfaction;
         optional<int> new_satisfaction;
-        void OnSatisfactionChanged (Person& p, int old_value, int new_value) override {
+        void OnSatisfactionChanged(Person& p, int old_value, int new_value) override {
             this->person = &p;
             this->old_satisfaction = old_value;
             this->new_satisfaction = new_value;
