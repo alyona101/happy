@@ -114,22 +114,31 @@ public:
 
 // Студент.
 // День студента проходит за учёбой
-class Student {
+class Student :public Person
+{
+protected:
+    int study_;
+
 public:
-    Student(const std::string& name, int age) {
-        // Напишите недостающий код
+    void Dance() const
+    {
+        cout << name << " is dancing"s << endl;
+        satisfaction + 3;
     }
-
-    // День студента проходит за учёбой
-
-    // Учёба увеличивает уровень знаний на 1, уменьшает уровень удовлетворённости на 3
-    void Study() {
-        // Напишите реализацию самостоятельно
+    int GetKnowledgelevel() const
+    {
+        return study_;
     }
-
-    // Возвращает уровень знаний
-    int GetKnowledgeLevel() const {
-        // Заглушка, напишите реализацию самостоятельно
-        return 0;
+    void LiveADay() const override
+    {
+        satisfaction - 3;
+    }
+    Student(const& name, int age)
+        :Person(name, age)
+    {
+    }
+    void Study()
+    {
+        cout << GetName() << " is study"s << endl;
     }
 };
