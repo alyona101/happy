@@ -1,4 +1,4 @@
-#include "people.h"
+
 #include "supervisor.h"
 
 #include <cassert>
