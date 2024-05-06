@@ -24,8 +24,11 @@ protected:
 */
 class Person {
 public:
-    Person(const std::string& name, int age) {
-        // Напишите реализацию самостоятельно
+    Person(const std::string& name, int age, PersonObserver* obs, int count)
+        :name_ = name
+        ,age_ = age
+        ,observer_ = obs
+    {  
     }
 
     int GetSatisfaction() const {
@@ -51,24 +54,30 @@ public:
     // Увеличивает на 1 количество походов на танцы
     // Увеличивает удовлетворённость на 1
     void Dance() {
-        // Напишите тело метода самостоятельно
+        count_dance_++;
+        satisfaction_++;
     }
 
     int GetDanceCount() const {
-        // Заглушка. Напишите реализацию самостоятельно
-        return 0;
+        return count_dance_;
     }
 
     // Прожить день. Реализация в базовом классе ничего не делает
-    void LiveADay() {
+    virtual void LiveADay() {
         // Подклассы могут переопределить этот метод
+    }
+
+protected:
+    void SetSatisfaction() {
+
     }
 
 private:
     std::string name_;
     PersonObserver* observer_ = nullptr;
-    int satisfaction_ = 100;
     int age_;
+    int count_dance_;
+    int satisfaction_ = 100;
 };
 
 // Рабочий.
