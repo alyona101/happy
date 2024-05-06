@@ -74,24 +74,32 @@ private:
 // Рабочий.
 // День рабочего проходит за работой
 class Worker {
+private:
+    std::string name;
+    int age;
+    int satisfactionLevel;
+    int workDone;
+
 public:
-    Worker(const std::string& name, int age) {
-        // Напишите недостающий код
+    Worker(std::string workerName, int workerAge, int initialSatisfactionLevel) {
+        name = workerName;
+        age = workerAge;
+        satisfactionLevel = initialSatisfactionLevel;
+        workDone = 0;
     }
 
-    // Рабочий старше 30 лет и младше 40 за танец получает 2 единицы удовлетворённости вместо 1
-
-    // День рабочего проходит за работой
-
-    // Увеличивает счётчик сделанной работы на 1, уменьшает удовлетворённость на 5
-    void Work() {
-        // Напишите тело метода самостоятельно
+    void dance() {
+        if (age > 30 && age < 40) {
+            satisfactionLevel += 2;
+        }
+        else {
+            satisfactionLevel += 1;
+        }
     }
 
-    // Возвращает значение счётчика сделанной работы
-    int GetWorkDone() const {
-        // Заглушка. Напишите реализацию самостоятельно
-        return 0;
+    void work() {
+        satisfactionLevel -= 5;
+        workDone += 1;
     }
 };
 
