@@ -8,13 +8,13 @@ class Person;
 class PersonObserver {
 public:
     // Этот метод вызывается, когда меняется состояние удовлетворённости человека
-    void OnSatisfactionChanged(Person& /*person*/, int /*old_value*/, int /*new_value*/) {
-        // Реализация метода базового класса ничего не делает
+    virtual void OnSatisfactionChanged(Person& person, int old_value, int new_value) {
+        cout << "The Satisfaction changed from " << old_value << " to " << new_value << endl;
     }
 
 protected:
     // Класс PersonObserver не предназначен для удаления напрямую
-    ~PersonObserver() = default;
+    virtual ~PersonObserver() = default;
 };
 
 /*
