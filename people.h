@@ -179,33 +179,3 @@ public:
 private:
     int study_ = 0;
 };
-=======
-class Student :public Person
-{
-protected:
-    int study_;
-
-public:
-    void Dance() const
-    {
-        cout << name << " is dancing"s << endl;
-        satisfaction + 3;
-    }
-    int GetKnowledgelevel() const
-    {
-        return study_;
-    }
-    void LiveADay() const override
-    {
-        satisfaction - 3;
-    }
-    Student(const& name, int age)
-        :Person(name, age)
-    {
-    }
-    void Study()
-    {
-        cout << GetName() << " is study"s << endl;
-    }
-};
->>>>>>> 48ad5b29363b779c2d5007a4890ab469083b2586
