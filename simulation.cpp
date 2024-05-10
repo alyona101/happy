@@ -10,20 +10,20 @@
 using namespace std;
 
 // Симуляция жизни группы людей в течение num_steps дней
-void RunSimulation(vector<unique_ptr<Person>>& people, int num_days) {
+void RunSimulation(vector<unique_ptr<person::Person>>& people, int num_days) {
     for (int i = 0; i < num_days; ++i) {
-        for (auto& person : people) {
+        for (auto& person :  people) {
             person->LiveADay();
         }
     }
 }
 
 void Tests() {
-    struct TestObserver : public PersonObserver {
-        Person* person = nullptr;
+    struct TestObserver : public obsrever:: PersonObserver {
+        person::Person* person = nullptr;
         optional<int> old_satisfaction;
         optional<int> new_satisfaction;
-        void OnSatisfactionChanged(Person& p, int old_value, int new_value) override {
+        void OnSatisfactionChanged(person::Person& p, int old_value, int new_value) override {
             this->person = &p;
             this->old_satisfaction = old_value;
             this->new_satisfaction = new_value;
@@ -31,7 +31,7 @@ void Tests() {
     };
 
     {
-        Person p{"Ivan"s, 30};
+        person::Person p{"Ivan"s, 30};
         assert(p.GetDanceCount() == 0);
         const int old_satisfaction = p.GetSatisfaction();
         assert(old_satisfaction == 100);
@@ -50,7 +50,7 @@ void Tests() {
     }
 
     {
-        Worker w{"Ivan"s, 35};
+        worker::Worker w{"Ivan"s, 35};
         const int old_satisfaction = w.GetSatisfaction();
         assert(w.GetWorkDone() == 0);
         w.Work();
@@ -69,7 +69,7 @@ void Tests() {
     }
 
     {
-        Student s{"Ivan"s, 18};
+        student :: Student s{"Ivan"s, 18};
         const int old_satisfaction = s.GetSatisfaction();
         assert(s.GetKnowledgeLevel() == 0);
         s.Study();
@@ -88,7 +88,7 @@ void Tests() {
     }
 
     {
-        Worker w("Ivan"s, 35);
+        worker:: Worker w("Ivan"s, 35);
 
         SatisfactionSupervisor sup{95, 97};
         w.SetObserver(&sup);
@@ -112,7 +112,7 @@ void Tests() {
     // Проверка полиморфного разрушения объекта Person
     {
         // Класс, уведомляющий о своём разрушении
-        struct DestructivePerson : public Person {
+        struct DestructivePerson : public person::Person {
             explicit DestructivePerson(bool& destruction_flag)
                 : Person("test"s, 20)
                 , destruction_flag_(destruction_flag) {
@@ -127,7 +127,7 @@ void Tests() {
         };
 
         bool person_destroyed = false;
-        unique_ptr<Person> p = make_unique<DestructivePerson>(person_destroyed);
+        unique_ptr<person::Person> p = make_unique<DestructivePerson>(person_destroyed);
         assert(!person_destroyed);
         p.reset();
         assert(person_destroyed);
@@ -137,9 +137,9 @@ void Tests() {
 int main() {
     Tests();
 
-    vector<unique_ptr<Person>> people;
-    people.emplace_back(make_unique<Worker>("Mario"s, 35));
-    people.emplace_back(make_unique<Student>("Harry Potter"s, 18));
+    vector<unique_ptr<person::Person>> people;
+    people.emplace_back(make_unique<worker::Worker>("Mario"s, 35));
+    people.emplace_back(make_unique<student:: Student>("Harry Potter"s, 18));
 
     // Назначаем надзирателя, который следит, чтобы уровень удовлетворённости был в пределах от 90 до 100
     SatisfactionSupervisor supervisor(90, 100);

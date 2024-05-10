@@ -9,7 +9,7 @@
     побуждает человека танцевать до тех пор, пока уровень уровень удовлетворённости
     не станет больше или равен максимальному значению
 */
-class SatisfactionSupervisor : public PersonObserver
+class SatisfactionSupervisor : public obsrever:: PersonObserver
 {
 public:
     // Конструктор принимает значение нижнего и верхнего уровня удовлетворённости
@@ -18,7 +18,7 @@ public:
         max_satisfaction_(max_satisfaction)
     {
     }
-    void OnSatisfactionChanged(Person& person, int old_value, int new_value)
+    void OnSatisfactionChanged(person::Person& person, int old_value, int new_value)
     {
         if (old_value > new_value)
         {
